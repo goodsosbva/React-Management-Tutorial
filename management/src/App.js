@@ -1,7 +1,25 @@
 import logo from './logo.svg';
 import React, { Component } from 'react';
 import './App.css';
+import Paper from '@material-ui/core/Table';
 import Custmoer from './components/Customer';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow'
+import TableCell from '@material-ui/core/TableCell'
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = (theme) => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: "auto"
+  },
+  table: {
+    minWidth: 1080
+  }
+})
 
 const custmoer = [
 {
@@ -32,48 +50,42 @@ const custmoer = [
 
 class App extends Component {
   render () {
-  return (
-      <div>
-        {
-        /* <Custmoer
-          id={custmoer[0].id}
-          imgage={custmoer[0].image}
-          name={custmoer[0].name}
-          birthday={custmoer[0].birthday}
-          gender={custmoer[0].gender}
-          job={custmoer[0].job}
-        />
-        <Custmoer
-          id={custmoer[1].id}
-          imgage={custmoer[1].image}
-          name={custmoer[1].name}
-          birthday={custmoer[1].birthday}
-          gender={custmoer[1].gender}
-          job={custmoer[1].job}
-        />
-        <Custmoer
-          id={custmoer[2].id}
-          imgage={custmoer[2].image}
-          name={custmoer[2].name}
-          birthday={custmoer[2].birthday}
-          gender={custmoer[2].gender}
-          job={custmoer[2].job}
-        /> */
-         custmoer.map (c => {
-           return <Custmoer
-            key={c.id}
-            id={c.id}
-            image={c.image}
-            name={c.name}
-            birthday={c.birthday}
-            gender={c.gender}
-            job={c.job}
-           />
-         })
-        }
-      </div>
+    const { classes } = this.props;
+     
+    return (
+      <Paper className={classes.root}>
+      
+        <Table className={classes.table}>
+          
+          <TableHead>
+            <TableCell>번호</TableCell>
+            <TableCell>이미지</TableCell>
+            <TableCell>이름</TableCell>
+            <TableCell>생년월일</TableCell>
+            <TableCell>상별</TableCell>
+            <TableCell>직업</TableCell>
+          </TableHead>
+          <TableBody>
+            {custmoer.map (c => {
+            return ( <Custmoer
+              key={c.id}
+              id={c.id}
+              image={c.image}
+              name={c.name}
+              birthday={c.birthday}
+              gender={c.gender}
+              job={c.job}
+            />
+            );
+            })}
+          </TableBody>
+        </Table>
+        
+  
+      </Paper>
     );
   }
 }
 
-export default App;
+export default withStyles(styles)(App);
+
